@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        trabalhadores = {
+            dados: [
+                {
+                    "nome" : "José da Silva",
+                    "idade": 20,
+                    "sexo" : "M",
+                    "salario" : 2500
+                },
+                {
+                    "nome" : "Ana Maria",
+                    "idade": 33,
+                    "sexo" : "F",
+                    "salario" : 5500
+                },
+                {
+                    "nome" : "Pedro Alcântara",
+                    "idade": 22,
+                    "sexo" : "M",
+                    "salario" : 1500
+                },
+                {
+                    "nome" : "Maria  da Silva",
+                    "idade": 55,
+                    "sexo" : "F",
+                    "salario" : 2500
+                },
+                {
+                    "nome" : "Antônio Carlos",
+                    "idade": 45,
+                    "sexo" : "M",
+                    "salario" : 1000
+                }
+            ]
+        };
+        
+        function main() {
+            mostrarTrabalhadores();
+            mediaSalarial();
+            salariosMaioresQue3k();
+            trabalhadorSexoMasculino();
+            trabalhadoraSexoFeminino();
+            maiorSalario();
+            menorSalario();
+            salarioMaiorQue5kMasculino();
+            salarioMaiorQue2kFeminino();
+        };
+
+        function mostrarTrabalhadores() {
+            document.write("<h2>Funcionários Cadastrados</h2><hr>");
+            document.write("<table>");
+            document.write("<th>Nome Completo</th><th>Idade</th><th>Sexo</th><th>Salário</th>");
+            trabalhadores.dados.forEach((elemento) => {
+                document.write( `<tr><td>${elemento.nome}</td><td>${elemento.idade}</td><td>${elemento.sexo}</td><td>${elemento.salario}</td></tr>`);
+            });
+            document.write("</table>");
+        };
+
+        // function mostrarTrabalhadores() {
+        //     document.write("<h2>Funcionários Cadastrados</h2><hr>");
+        //     trabalhadores.dados.forEach(elemento => document.write(`</p> Nome Completo: ${elemento.nome}; Idade: ${elemento.idade}; Sexo: ${elemento.sexo}; Salário: ${elemento.salario}</p>`));
+        // };
+
+        function mediaSalarial() {
+            document.write("<h2>Média Salarial</h2><hr>");
+            media = trabalhadores.dados.reduce(((soma, trabalhador) => soma + parseInt(trabalhador.salario)),0) / trabalhadores.dados.length;
+            document.write(`Média salarial: R$${media}`);
+        }
+
+        function salariosMaioresQue3k() {
+            document.write("<h2>Funcionários que recebem acima de R$3.000</h2><hr>");
+            vet3k = trabalhadores.dados.filter(elemento => elemento.salario >= 3000);
+            vet3k.forEach( elemento => document.write(`</p> Nome Completo: ${elemento.nome}; Idade: ${elemento.idade}; Sexo: ${elemento.sexo}; Salário: ${elemento.salario}</p>`));
+        };
+
+        function trabalhadorSexoMasculino() {
+            document.write("<h2>Dados dos funcionários do sexo Masculino</h2><hr>");
+            vetMasculino = trabalhadores.dados.filter(trabalhador => trabalhador.sexo == "M");
+            vetMasculino.forEach( elemento => document.write(`</p> Nome Completo: ${elemento.nome}; Idade: ${elemento.idade}; Sexo: ${elemento.sexo}; Salário: ${elemento.salario}</p>`));
+        }
+
+        function trabalhadoraSexoFeminino() {
+            document.write("<h2>Dados das funcionárias do sexo Feminino</h2><hr>");
+            vetFeminino = trabalhadores.dados.filter(trabalhador => trabalhador.sexo == "F");
+            vetFeminino.forEach( elemento => document.write(`</p> Nome Completo: ${elemento.nome}; Idade: ${elemento.idade}; Sexo: ${elemento.sexo}; Salário: ${elemento.salario}</p>`));
+        }
+
+        function maiorSalario() {
+            document.write("<h2>Dados dos trabalhador com MAIOR salário</h2><hr>");
+            trabalhadorMaiorSalario = trabalhadores.dados.reduce((acumulador, trabalhador) => {
+                return (trabalhador.salario > acumulador.salario) ? trabalhador : acumulador;
+            });
+            document.write(`</p> Nome Completo: ${trabalhadorMaiorSalario.nome}; Idade: ${trabalhadorMaiorSalario.idade}; Sexo: ${trabalhadorMaiorSalario.sexo}; Salário: ${trabalhadorMaiorSalario.salario}</p>`);
+        }
+
+        function menorSalario() {
+            document.write("<h2>Dados dos trabalhador com MENOR salário</h2><hr>");
+            trabalhadorMenorSalario = trabalhadores.dados.reduce((acumulador, trabalhador) => {
+                return (trabalhador.salario < acumulador.salario) ? trabalhador : acumulador;
+            });
+            document.write(`</p> Nome Completo: ${trabalhadorMenorSalario.nome}; Idade: ${trabalhadorMenorSalario.idade}; Sexo: ${trabalhadorMenorSalario.sexo}; Salário: ${trabalhadorMenorSalario.salario}</p>`);
+        }
+
+        function salarioMaiorQue5kMasculino() {
+            document.write("<h2>Trabalhadores do sexo masculino com salário superior a R$5.000,00</h2><hr>");
+            vetMasculino = trabalhadores.dados.filter(trabalhador => trabalhador.sexo == "M");
+            vet5k = vetMasculino.filter(elemento => elemento.salario >= 5000);
+            vet5k.forEach( elemento => document.write(`</p> Nome Completo: ${elemento.nome}; Idade: ${elemento.idade}; Sexo: ${elemento.sexo}; Salário: ${elemento.salario}</p>`));
+        }
+
+        function salarioMaiorQue2kFeminino() {
+            document.write("<h2>Trabalhadores do sexo feminino com salário superior a R$2.000,00</h2><hr>");
+            vetFeminino = trabalhadores.dados.filter(trabalhador => trabalhador.sexo == "F");
+            vet2k = vetFeminino.filter(elemento => elemento.salario >= 2000);
+            vet2k.forEach( elemento => document.write(`</p> Nome Completo: ${elemento.nome}; Idade: ${elemento.idade}; Sexo: ${elemento.sexo}; Salário: ${elemento.salario}</p>`));
+        }
+        
+    </script>
+</head>
+<body onload="main()">
+
+</body>
+</html>
